@@ -1,0 +1,26 @@
+{
+	"auth": {
+		"salesappapieb6b9674": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"api": {
+		"SalesAppApi": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authsalesappapieb6b9674"
+						}
+					}
+				}
+			}
+		}
+	}
+}

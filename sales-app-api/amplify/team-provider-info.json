@@ -1,0 +1,19 @@
+{
+    "local": {
+        "awscloudformation": {
+            "AuthRoleName": "sales-app-api-local-20191002021453-authRole",
+            "UnauthRoleArn": "arn:aws:iam::055664757047:role/sales-app-api-local-20191002021453-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::055664757047:role/sales-app-api-local-20191002021453-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "sales-app-api-local-20191002021453-deployment",
+            "UnauthRoleName": "sales-app-api-local-20191002021453-unauthRole",
+            "StackName": "sales-app-api-local-20191002021453",
+            "StackId": "arn:aws:cloudformation:us-east-1:055664757047:stack/sales-app-api-local-20191002021453/6bade800-e4ba-11e9-89bd-0a325fb8c980"
+        },
+        "categories": {
+            "auth": {
+                "salesappapieb6b9674": {}
+            }
+        }
+    }
+}

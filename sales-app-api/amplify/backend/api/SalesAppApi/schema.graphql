@@ -1,0 +1,255 @@
+type Salesperson @model @key(fields: ["user_id"]) {
+  user_id: String!
+  name: String
+  designation: String
+  profile_pic_url: String
+  customer_list: [customer]
+  territory_list: [territory]
+}
+
+type customer {
+  customer_id: String!
+  customer_name: String!
+}
+
+type territory {
+  territory_id: String!
+  territory_name: String!
+}
+
+type RunRate @model @key(fields: ["territory_id"]){
+  territory_id: String!
+  date: String
+  runrate: val_and_volm
+  req_runrate: val_and_volm
+}
+
+type val_and_volm {
+	val: Float!
+	volm: Float!
+}
+
+type Sales @model @key(fields: ["territory_id"]){
+  territory_id: String!
+  date: String
+  sales: val_and_volm
+  target: val_and_volm
+}
+
+type Credit @model @key(fields: ["territory_id"]){
+  territory_id: String!
+  date: String
+  credit: Float
+  req_credit: Float
+}
+
+type LeaderBoard @model @key(fields: ["territory_id"]){
+  territory_id: String!
+  date: String
+  sales: Float
+  my_rank: Int
+  first_rank: Float
+  top10_cutoff: Float
+}
+
+type todayTodo @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  CustomerTodoList: [cust_todo]
+}
+
+type cust_todo {
+  customer_id: String!
+  type: String
+  action: String
+  type_icon_id: String
+  action_icon_id: String
+}
+
+type CustomerInfo @model @key(fields: ["customer_id"]) {
+  customer_id: String!
+  name: String
+  location: String
+  primary_contact: contact
+  primary_contact_ph_no: String
+  date: String
+  no_of_invoices_MTD: Int
+  visits_this_month: Int
+  calls_this_month: Int
+  last_visit_date: String
+  last_call_date: String
+  last_invoice_date: String   
+  extra_info: [String]
+}
+
+type contact {
+  name: String!
+  ph_no: String!
+}
+
+type CustomerWiseSales @model @key(fields: ["customer_id"]) {
+  customer_id: String!
+  date: String
+  MTD_sales: Float
+  target: Float
+}
+
+type CustomerWiseCredit @model @key(fields: ["customer_id"]) {
+  customer_id: String!
+  date: String
+  credit_available: Float
+  req_credit: Float
+}
+
+type PendingComplaints @model @key(fields: ["customer_id"]) {
+  customer_id: String!
+  date: String
+  month: String
+  complaint_text: [String]
+}
+
+type CustomerWiseHotList @model @key(fields: ["customer_id"]) {
+  customer_id: String!
+  date: String
+  month: String
+  cust_hot_list: [hot_list]
+  text: [String]
+}
+
+type hot_list {
+  text: String!
+  pending_date: String!
+  is_alarm_set: Boolean
+}
+
+type CustomerWiseMTDPurchase @model @key(fields: ["customer_id"]) {
+  customer_id: String!
+  date: String
+  month: String
+  MTDpurchase_list: [MTDpurchase]
+}
+
+type MTDpurchase {
+  sku: String!
+  last_purchase_date: String!
+  this_cust_purchase: Float!
+  other_cust_purchase_min: Float!
+  other_cust_purchase_max: Float!
+}
+
+type YTDSalesTrends @model @key(fields: ["territory_id"]){
+  territory_id: String!
+  year: String
+  date: String
+  actual_sale: val_and_volm
+  target: val_and_volm
+}
+
+type TerritoryWiseSalesTrends @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  date: String
+  month_wise_sale_target: [month_sale_target]
+}
+
+type month_sale_target {
+  month: String!
+  actual_sale: val_and_volm!
+  target: val_and_volm!
+}
+
+type TerritoryWiseSalesOperation @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  date: String
+  territorySalesList: [monthwise_cov_depth_range]
+}
+
+type monthwise_cov_depth_range {
+  months: String!
+  coverage: Float!
+  depth: Float!
+  range: Float!
+}
+
+type TerritoryWiseCustPerformance @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  date: String
+  upward_trend_cust: [String]
+  downward_trend_cust: [String]
+}
+
+type TerritoryWiseSKUPerformance @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  date: String
+  upward_trend_sku: [String]
+  downward_trend_sku: [String]
+}
+
+type TerritoryWiseProjection @model @key(fields: ["territory_id"]){
+  territory_id: String!
+  todays_date: String
+  todays_sale: Float
+  current_run_rate: Float
+  target: Float
+  projected_sales: [date_wise_value]
+}
+
+type date_wise_value {
+  date: String!
+  value: Float!
+}
+
+type Badges @model @key(fields: ["salesperson_id", "territory_id"]){
+  salesperson_id: String!
+  territory_id: String!
+  date: String
+  content_list: [icon_text_vid]
+}
+
+type icon_text_vid {
+  icon: String!
+  text: String!
+  vidStatus: Boolean!
+}
+
+type ListLeaders @model {
+  date: String
+  leader_list: [leader_rank_pic_name]
+}
+
+type leader_rank_pic_name {
+  rank: Int!
+  name: String!
+  profile_pic: String!
+}
+
+type Priority @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  date: String
+  priority_list: [cust_sale_target_lastinvoice] 
+}
+
+type cust_sale_target_lastinvoice {
+  customer_name: String!
+  sale: Float!
+  target: Float!
+  last_invoice_date: String!
+}
+
+type TerritoryCreditReq @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  date: String
+  credit_req_list: [cust_credit_req]
+}
+
+type cust_credit_req {
+  customer_name: String!
+  MTD_sale: Float!
+  monthly_target: Float!
+  balance_sale: Float!
+  credit_available: Float!
+}
+
+type Signal @model @key(fields: ["territory_id"]) {
+  territory_id: String!
+  time: String
+  info: String
+}
